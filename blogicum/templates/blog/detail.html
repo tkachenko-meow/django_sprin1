@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
-{% load static %}
 
-{% block title %} {{ post.location }}. {{ post.date }} {% endblock %}
+{% block title %}{{ post.location }}. {{ post.date }}{% endblock %}
 
 {% block content %}
   <article>
@@ -16,6 +15,6 @@
         Категория: {{ post.category }}</a>
       </li>
     </ul>
-    <p>{{ post.text }}</p>
+    <p>{{ post.text|linebreaksbr }}</p>
   </article>
 {% endblock %}

@@ -46,12 +46,16 @@ posts = [
 ]
 
 
+
 def index(request):
     return render(request, 'blog/index.html', {'posts': reversed(posts)})
 
 
 def post_detail(request, id):
-    return render(request, 'blog/detail.html', {'post': posts[id]})
+    for post in posts:
+        if post['id'] == id:
+            context = {'post': posts[id]}
+    return render(request, 'blog/detail.html', context)
 
 
 def category_posts(request, category_slug):
