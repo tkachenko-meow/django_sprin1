@@ -51,6 +51,7 @@ for post in posts:
     posts_dict[post['id']] = count
     count += 1
 
+
 def index(request):
     return render(request, 'blog/index.html', {'posts': reversed(posts)})
 
