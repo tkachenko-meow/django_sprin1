@@ -45,16 +45,19 @@ posts = [
     },
 ]
 
-
+posts_dict = {}
+count = 0
+for post in posts:
+    posts_dict[post['id']] = count
+    count += 1
 
 def index(request):
     return render(request, 'blog/index.html', {'posts': reversed(posts)})
 
 
 def post_detail(request, id):
-    for post in posts:
-        if post['id'] == id:
-            context = {'post': posts[id]}
+    for id in posts_dict:
+        context = {'post': posts[posts_dict[id]]}
     return render(request, 'blog/detail.html', context)
 
 
