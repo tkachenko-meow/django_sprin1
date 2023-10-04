@@ -57,7 +57,7 @@ def index(request):
 
 
 def post_detail(request, id):
-    for id in posts_dict:
+    if id in posts_dict:
         context = {'post': posts[posts_dict[id]]}
     return render(request, 'blog/detail.html', context)
 
