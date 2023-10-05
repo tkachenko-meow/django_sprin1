@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render
 
 
@@ -45,11 +45,7 @@ posts = [
     },
 ]
 
-posts_dict = {}
-count = 0
-for post in posts:
-    posts_dict[post['id']] = count
-    count += 1
+post_id = {post['id']: post for post in posts}
 
 
 def index(request):
@@ -57,9 +53,10 @@ def index(request):
 
 
 def post_detail(request, id):
-    if id in posts_dict:
-        context = {'post': posts[posts_dict[id]]}
-    return render(request, 'blog/detail.html', context)
+    if id in post_id:
+        context = {'post': post_id[id]}
+        return render(request, 'blog/detail.html', context)
+    raise Http404('Данной страницы не существует')
 
 
 def category_posts(request, category_slug):
